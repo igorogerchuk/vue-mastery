@@ -34,6 +34,8 @@ app.component('product-display', {
             <button @click="removeFromCart" class="button">Remove From Cart</button>
           </div>
         </div>
+        <review-form @review-submitted='addReview'></review-form>
+        <review-list v-if='reviews.length > 0' :reviews='reviews'></review-list>
       </div>
     `,
   data() {
@@ -59,6 +61,7 @@ app.component('product-display', {
         },
       ],
       selectedProduct: 0,
+      reviews: [],
     };
   },
   methods: {
@@ -70,6 +73,9 @@ app.component('product-display', {
     },
     selectProduct(id) {
       this.selectedProduct = id;
+    },
+    addReview(productReview) {
+      this.reviews.push(productReview);
     },
   },
   computed: {
@@ -94,6 +100,6 @@ app.component('product-display', {
       }
 
       return 2.99;
-    }
+    },
   },
 });
